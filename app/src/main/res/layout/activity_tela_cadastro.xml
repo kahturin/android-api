@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TelaCadastroActivity">
+    tools:context=".login.TelaCadastroActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
+        android:id="@+id/avatar"
+        android:layout_width="0dp"
         android:layout_height="156dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
@@ -17,10 +17,10 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/login"
+        android:id="@+id/entrarCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttomCadastrar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,8 +46,8 @@
         app:layout_constraintBottom_toTopOf="@+id/editNome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/login"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/entrarCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/avatar"
         app:layout_constraintVertical_bias="0.52" />
 
     <TextView
@@ -55,12 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:text="Geek Style"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
     <EditText
         android:id="@+id/editEmail"
