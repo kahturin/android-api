@@ -1,6 +1,7 @@
 package br.com.senac.pi.login
 
 import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -22,6 +23,8 @@ class TelaCadastroActivity : AppCompatActivity() {
             val intent = Intent(applicationContext,LoginActivity::class.java)
             startActivity(intent)
         }
+
+        binding.cadastrese.setPaintFlags(binding.entrarCadastro.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
 
         binding.buttomCadastrar.setOnClickListener {
             preencherCampo(binding.editNome)
