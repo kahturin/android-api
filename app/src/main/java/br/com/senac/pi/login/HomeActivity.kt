@@ -2,7 +2,6 @@ package br.com.senac.pi.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityHomeBinding
