@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PI">
         <activity
+            android:name=".login.InfoUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.HomeActivity"
             android:exported="true">
             <intent-filter>
