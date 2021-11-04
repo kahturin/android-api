@@ -1,6 +1,5 @@
 package br.com.senac.pi.login
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,17 +25,23 @@ class HomeActivity : AppCompatActivity() {
         binding.recycleView.adapter = adapterProduto
 
         val produto1 = Produto(
+            0,
             "Quadros",
-            R.drawable.hp,
             "Apple/Android",
+            0F,
+            R.drawable.hp,
+            "",
             "40R$"
         )
 
         listaProdutos.add(produto1)
         val produto2 = Produto(
-            "Canecas",
-            R.drawable.canecaspider,
+            0,
+            "Quadros",
             "Apple/Android",
+            0F,
+            R.drawable.hp,
+            "",
             "40R$"
         )
 

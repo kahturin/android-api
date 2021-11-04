@@ -11,7 +11,7 @@ import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
-import br.com.senac.pi.login.servicos.getRetrofit
+import br.com.senac.pi.login.servicos.retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,15 +38,12 @@ class LoginActivity : AppCompatActivity() {
             preencherCampo(binding.edittEmailAddress)
             preencherCampo(binding.editPassword)
 
-            login.email = binding.edittEmailAddress.toString()
-            login.password = binding.editPassword.toString()
+            login.password = binding.editPassword.text.toString()
+            login.email = binding.edittEmailAddress.text.toString()
 
-            val rt = getRetrofit()
-            Toast.makeText(
-                this@LoginActivity,
-                login.email + "-" + login.password,
-                Toast.LENGTH_LONG
-            ).show()
+
+            val rt = retrofit
+            Toast.makeText(this@LoginActivity, "Erro", Toast.LENGTH_LONG).show()
             rt?.let {
                 val ser = rt.create(LoginService::class.java)
 
@@ -73,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onFailure(call: Call<Login>, t: Throwable) {
                         Toast.makeText(this@LoginActivity, "Erro", Toast.LENGTH_LONG).show()
+                        Log.e("loginActivity", "login", t)
                     }
                 }
                 call.enqueue(callback)
