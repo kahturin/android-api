@@ -14,3 +14,6 @@ val client: OkHttpClient = OkHttpClient.Builder()
 
 val retrofit: Retrofit? =  Retrofit.Builder().baseUrl(url).addConverterFactory(
     GsonConverterFactory.create()).client(client).build()
+
+var token: String = ""
+var usuario: String = ""

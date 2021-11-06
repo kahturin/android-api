@@ -12,6 +12,8 @@ import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
 import br.com.senac.pi.login.servicos.retrofit
+import br.com.senac.pi.login.servicos.token
+import br.com.senac.pi.login.servicos.usuario
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,13 +57,14 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val l = response.body()
                             l?.let {
-                                println(l.nome)
-                                println(l.token)
+                                usuario = l.nome
+                                token = l.token
+                                goToHome()
                             }
                         } else {
                             Toast.makeText(
                                 this@LoginActivity,
-                                "Erro ao realizar login",
+                                "Usuario ou senha inválido",
                                 Toast.LENGTH_LONG
                             ).show()
                             Log.e(response.code().toString(), response.errorBody().toString())
@@ -83,5 +86,10 @@ class LoginActivity : AppCompatActivity() {
             binding.editPassword.requestFocus()
             binding.edittEmailAddress.requestFocus()
         }
+    }
+
+    fun goToHome(){
+        val i = Intent(this@LoginActivity, HomeActivity::class.java)
+        startActivity(i)
     }
 }

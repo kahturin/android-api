@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
             "Apple/Android",
             0F,
             R.drawable.hp,
-            "",
+            0,
             "40R$"
         )
 
@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
             "Apple/Android",
             0F,
             R.drawable.hp,
-            "",
+            0,
             "40R$"
         )
 
