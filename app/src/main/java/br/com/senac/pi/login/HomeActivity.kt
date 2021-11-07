@@ -1,7 +1,9 @@
 package br.com.senac.pi.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityHomeBinding
@@ -12,6 +14,14 @@ class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var usuario: String = ""
+        var token:String = ""
+        val bundle :Bundle ?=intent.extras
+        if (bundle!=null){
+            usuario = bundle.getString("usuario").toString()
+            token =bundle.getString("token").toString()
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)

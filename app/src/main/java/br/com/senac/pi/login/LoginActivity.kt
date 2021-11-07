@@ -12,8 +12,6 @@ import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
 import br.com.senac.pi.login.servicos.retrofit
-import br.com.senac.pi.login.servicos.token
-import br.com.senac.pi.login.servicos.usuario
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,15 +35,16 @@ class LoginActivity : AppCompatActivity() {
         binding.entrarLogin.paintFlags = binding.entrarLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.buttonEntrar.setOnClickListener {
-            preencherCampo(binding.edittEmailAddress)
-            preencherCampo(binding.editPassword)
+            //preencherCampo(binding.edittEmailAddress)
+            //preencherCampo(binding.editPassword)
 
-            login.password = binding.editPassword.text.toString()
-            login.email = binding.edittEmailAddress.text.toString()
+            //login.password = binding.editPassword.text.toString()
+            //login.email = binding.edittEmailAddress.text.toString()
+            login.password = "senha123321"
+            login.email = "djalma@djalma.com"
 
 
             val rt = retrofit
-            Toast.makeText(this@LoginActivity, "Erro", Toast.LENGTH_LONG).show()
             rt?.let {
                 val ser = rt.create(LoginService::class.java)
 
@@ -57,9 +56,9 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val l = response.body()
                             l?.let {
-                                usuario = l.nome
-                                token = l.token
-                                goToHome()
+                               val usuario = l.nome
+                               val token = l.token
+                                goToHome(usuario, token)
                             }
                         } else {
                             Toast.makeText(
@@ -88,8 +87,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun goToHome(){
+    fun goToHome(u: String, t:String){
         val i = Intent(this@LoginActivity, HomeActivity::class.java)
+        i.putExtra("usuario", u)
+        i.putExtra("token", t)
         startActivity(i)
     }
 }
