@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.InfoUserActivity">
-
+    tools:context=".login.EditInfoUserActivity">
     <ScrollView
         android:id="@+id/scrollInfoUser"
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
                 android:layout_height="wrap_content"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <EditText
                 android:id="@+id/editUserNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,8 +33,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserSobrenome"
+            <EditText
+                android:id="@+id/editUserSobrenome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sobrenome"
@@ -45,8 +44,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserCep"
+            <EditText
+                android:id="@+id/editUserCep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cep"
@@ -56,8 +55,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserEndereco"
+            <EditText
+                android:id="@+id/editUserEndereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Endereco"
@@ -67,8 +66,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserNumero"
+            <EditText
+                android:id="@+id/editUserNumero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Numero"
@@ -78,8 +77,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserComplemento"
+            <EditText
+                android:id="@+id/editUserComplemento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Complemento"
@@ -89,8 +88,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserBairro"
+            <EditText
+                android:id="@+id/editUserBairro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Bairro"
@@ -100,8 +99,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserCidade"
+            <EditText
+                android:id="@+id/editUserCidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cidade"
@@ -111,8 +110,8 @@
                 android:paddingBottom="8dp"
                 android:textSize="26dp" />
 
-            <TextView
-                android:id="@+id/infoUserEstado"
+            <EditText
+                android:id="@+id/editUserEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Estado"
@@ -123,7 +122,7 @@
                 android:textSize="26dp" />
 
             <LinearLayout
-                android:id="@+id/infoUserBtns"
+                android:id="@+id/editUserBtns"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -137,10 +136,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Editar" />
+                    android:text="Salvar" />
+
+                <Button
+                    android:id="@+id/editBtnCancelar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar" />
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

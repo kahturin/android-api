@@ -11,10 +11,14 @@ import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
-import br.com.senac.pi.login.servicos.retrofit
+import br.com.senac.pi.login.servicos.url
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -44,7 +48,14 @@ class LoginActivity : AppCompatActivity() {
             login.email = "djalma@djalma.com"
 
 
-            val rt = retrofit
+            val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+            val rt: Retrofit? =  Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+
             rt?.let {
                 val ser = rt.create(LoginService::class.java)
 

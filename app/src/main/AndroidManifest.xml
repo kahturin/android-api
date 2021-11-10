@@ -13,8 +13,11 @@
         android:theme="@style/Theme.PI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".login.EditInfoUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.InfoUserActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

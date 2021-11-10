@@ -9,32 +9,41 @@ import android.widget.Toast
 import br.com.senac.pi.R
 import br.com.senac.pi.login.model.InfoUser
 import br.com.senac.pi.login.servicos.InfoUserService
-import br.com.senac.pi.login.servicos.retrofit
+import br.com.senac.pi.login.servicos.url
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class InfoUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_user)
+        var usuario: String = ""
+        var token:String = ""
 
-        val btnEdit = findViewById<Button>(R.id.infoUserBtnEdit)
+        val btnEdit = findViewById<Button>(R.id.editBtnSalvar)
 
         btnEdit.setOnClickListener {
             hello()
         }
 
-        var usuario: String = "djalma"
-        var token:String = "Bearer 21|43lo6cQpXZG3CpwA1mKIB0bE0QeXhSTjILhU8vjK"
 
+        val bundle :Bundle ?=intent.extras
+        if (bundle!=null){
+            usuario = bundle.getString("usuario").toString()
+            token =bundle.getString("token").toString()
 
-        //val bundle :Bundle ?=intent.extras
-       // if (bundle!=null){
-            //usuario = bundle.getString("usuario").toString()
-            //token =bundle.getString("token").toString()
+            val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
 
-            val rt = retrofit
+            val rt: Retrofit? =  Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
             rt?.let {
                 val ser = rt.create(InfoUserService::class.java)
 
@@ -48,7 +57,7 @@ class InfoUserActivity : AppCompatActivity() {
                             retorno?.let {
                                 val resp = it.info
                                 resp?.let {
-                                    findViewById<TextView>(R.id.infoUserNome).text = usuario
+                                    findViewById<TextView>(R.id.editUserNome).text = usuario
                                     findViewById<TextView>(R.id.infoUserSobrenome).text = resp.sobrenome
                                     findViewById<TextView>(R.id.infoUserCep).text = resp.cep
                                     findViewById<TextView>(R.id.infoUserEndereco).text = resp.endereco
@@ -63,7 +72,6 @@ class InfoUserActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<InfoUser>, t: Throwable) {
-                        Toast.makeText(this@InfoUserActivity, "Erro", Toast.LENGTH_LONG).show()
                         Log.e("InfoUserActivity", "Perfil", t)
                     }
                 }
@@ -71,9 +79,9 @@ class InfoUserActivity : AppCompatActivity() {
             }
 
         }
-    //}
+    }
 
     fun hello(){
-        Toast.makeText(this@InfoUserActivity, "Funfo", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Funfo", Toast.LENGTH_LONG).show()
     }
 }

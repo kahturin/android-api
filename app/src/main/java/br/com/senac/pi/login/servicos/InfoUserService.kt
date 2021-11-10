@@ -1,5 +1,6 @@
 package br.com.senac.pi.login.servicos
 
+import br.com.senac.pi.login.model.Info
 import br.com.senac.pi.login.model.InfoUser
 import br.com.senac.pi.login.model.MsgRetorno
 import retrofit2.Call
@@ -11,5 +12,5 @@ interface InfoUserService {
     fun perfil(@Header("Authorization") authorization: String): Call<InfoUser>
 
     @POST("/api/perfil/update")
-    fun setPerfil(@Body info: InfoUser, @Header("Authorization") authorization: String): Call <MsgRetorno>
+    fun setPerfil(@Body info: Info, @Header("Authorization") authorization: String): Call <MsgRetorno>
 }
