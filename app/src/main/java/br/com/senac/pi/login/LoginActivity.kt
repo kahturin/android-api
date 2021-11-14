@@ -11,7 +11,9 @@ import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
+import br.com.senac.pi.login.servicos.token
 import br.com.senac.pi.login.servicos.url
+import br.com.senac.pi.login.servicos.usuario
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,13 +41,11 @@ class LoginActivity : AppCompatActivity() {
         binding.entrarLogin.paintFlags = binding.entrarLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.buttonEntrar.setOnClickListener {
-            //preencherCampo(binding.edittEmailAddress)
-            //preencherCampo(binding.editPassword)
+            preencherCampo(binding.edittEmailAddress)
+            preencherCampo(binding.editPassword)
 
-            //login.password = binding.editPassword.text.toString()
-            //login.email = binding.edittEmailAddress.text.toString()
-            login.password = "senha123321"
-            login.email = "djalma@djalma.com"
+            login.password = binding.editPassword.text.toString()
+            login.email = binding.edittEmailAddress.text.toString()
 
 
             val client: OkHttpClient = OkHttpClient.Builder()
@@ -67,9 +67,9 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val l = response.body()
                             l?.let {
-                               val usuario = l.nome
-                               val token = l.token
-                                goToHome(usuario, token)
+                               usuario = l.nome
+                                token = l.token
+                                redirectHome()
                             }
                         } else {
                             Toast.makeText(
@@ -98,10 +98,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun goToHome(u: String, t:String){
+    fun redirectHome(){
         val i = Intent(this@LoginActivity, HomeActivity::class.java)
-        i.putExtra("usuario", u)
-        i.putExtra("token", t)
+        i.putExtra("usuario", usuario)
+        i.putExtra("token", token)
         startActivity(i)
     }
 }

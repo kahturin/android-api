@@ -12,4 +12,5 @@ data class Info(
     var estado: String? = "",
     var img_user: String? = "",
     var id_user: Int? = 0,
+    var name:String = "",
 )

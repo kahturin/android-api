@@ -1,15 +1,16 @@
 package br.com.senac.pi.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import br.com.senac.pi.R
 import br.com.senac.pi.login.model.InfoUser
-import br.com.senac.pi.login.servicos.InfoUserService
-import br.com.senac.pi.login.servicos.url
+import br.com.senac.pi.login.servicos.*
+import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,37 +23,48 @@ class InfoUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_user)
-        var usuario: String = ""
-        var token:String = ""
 
         val btnEdit = findViewById<Button>(R.id.editBtnSalvar)
 
         btnEdit.setOnClickListener {
-            hello()
+            redirectEditUser()
         }
 
+    }
 
-        val bundle :Bundle ?=intent.extras
-        if (bundle!=null){
+    override fun onResume() {
+        super.onResume()
+
+        if(token != ""){
+            getPerfil()
+        } else {
+            redirectLogin()
+        }
+    }
+
+    fun getPerfil() {
+        val bundle: Bundle? = intent.extras
+        if (bundle != null) {
             usuario = bundle.getString("usuario").toString()
-            token =bundle.getString("token").toString()
+            token = bundle.getString("token").toString()
 
             val client: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build()
 
-            val rt: Retrofit? =  Retrofit.Builder().baseUrl(url).addConverterFactory(
-                GsonConverterFactory.create()).client(client).build()
+            val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+            ).client(client).build()
             rt?.let {
                 val ser = rt.create(InfoUserService::class.java)
 
-                val call = ser.perfil(token)
+                val call = ser.perfil("Bearer $token")
 
                 val callback = object : Callback<InfoUser> {
 
                     override fun onResponse(call: Call<InfoUser>, response: Response<InfoUser>) {
-                        if(response.isSuccessful){
+                        if (response.isSuccessful) {
                             val retorno = response.body()
                             retorno?.let {
                                 val resp = it.info
@@ -66,6 +78,16 @@ class InfoUserActivity : AppCompatActivity() {
                                     findViewById<TextView>(R.id.infoUserBairro).text = resp.bairro
                                     findViewById<TextView>(R.id.infoUserCidade).text = resp.cidade
                                     findViewById<TextView>(R.id.infoUserEstado).text = resp.estado
+
+
+                                    resp.img_user?.let {
+                                        val card = findViewById<ImageView>(R.id.userImage)
+                                        val path = urlImage+resp.img_user
+
+                                        Picasso.get().load(path)
+                                            .error(R.drawable.ic_launcher_background)
+                                            .into(card)
+                                    }
                                 }
                             }
                         }
@@ -76,12 +98,19 @@ class InfoUserActivity : AppCompatActivity() {
                     }
                 }
                 call.enqueue(callback)
-            }
 
+            }
         }
     }
+    fun redirectEditUser() {
+        val i: Intent = Intent(this, EditInfoUserActivity::class.java)
+        i.putExtra("usuario", usuario)
+        i.putExtra("token", token)
+        startActivity(i)
+    }
 
-    fun hello(){
-        Toast.makeText(this, "Funfo", Toast.LENGTH_LONG).show()
+    fun redirectLogin(){
+        val i: Intent = Intent(this, LoginActivity::class.java)
+        startActivity(i)
     }
 }

@@ -9,13 +9,14 @@ import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityHomeBinding
 import br.com.senac.pi.login.adapter.adapterProduto
 import br.com.senac.pi.login.model.Produto
+import br.com.senac.pi.login.servicos.token
+import br.com.senac.pi.login.servicos.usuario
 
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var usuario: String = ""
-        var token:String = ""
+
         val bundle :Bundle ?=intent.extras
         if (bundle!=null){
             usuario = bundle.getString("usuario").toString()

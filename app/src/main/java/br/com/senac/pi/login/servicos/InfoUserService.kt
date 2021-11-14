@@ -11,6 +11,7 @@ interface InfoUserService {
     @GET("/api/perfil")
     fun perfil(@Header("Authorization") authorization: String): Call<InfoUser>
 
+    @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
     @POST("/api/perfil/update")
     fun setPerfil(@Body info: Info, @Header("Authorization") authorization: String): Call <MsgRetorno>
 }

@@ -7,3 +7,7 @@ import java.util.concurrent.TimeUnit
 
 const val url: String = "http://192.168.1.156:8000"
 
+var usuario: String = ""
+var token: String = ""
+var urlImage: String = "$url/storage/"
+
