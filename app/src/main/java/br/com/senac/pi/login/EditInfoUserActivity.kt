@@ -3,6 +3,7 @@ package br.com.senac.pi.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
 import br.com.senac.pi.R
@@ -119,6 +120,11 @@ class EditInfoUserActivity : AppCompatActivity() {
 
         return rt
     }
+
+   // fun abrirGaleria(){
+     //   val intent = Intent(Intent.ACTION_PICK,
+       //     MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+    //}
 
     fun obterPerfilUser(){
         val rt: Retrofit? = getRetrofit()

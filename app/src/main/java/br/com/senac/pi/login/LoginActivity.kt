@@ -41,11 +41,15 @@ class LoginActivity : AppCompatActivity() {
         binding.entrarLogin.paintFlags = binding.entrarLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.buttonEntrar.setOnClickListener {
-            preencherCampo(binding.edittEmailAddress)
-            preencherCampo(binding.editPassword)
+            //preencherCampo(binding.edittEmailAddress)
+            //preencherCampo(binding.editPassword)
 
-            login.password = binding.editPassword.text.toString()
-            login.email = binding.edittEmailAddress.text.toString()
+            //login.password = binding.editPassword.text.toString()
+            //login.email = binding.edittEmailAddress.text.toString()
+            login.password = "senha123321"
+            login.email = "djalma@djalma.com"
+
+
 
 
             val client: OkHttpClient = OkHttpClient.Builder()
@@ -99,7 +103,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun redirectHome(){
-        val i = Intent(this@LoginActivity, HomeActivity::class.java)
+       // val i = Intent(this@LoginActivity, HomeActivity::class.java)
+        //i.putExtra("usuario", usuario)
+        //i.putExtra("token", token)
+        //startActivity(i)
+
+        val i = Intent(this@LoginActivity, InfoUserActivity::class.java)
         i.putExtra("usuario", usuario)
         i.putExtra("token", token)
         startActivity(i)
