@@ -22,22 +22,22 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.home -> {
-                    frag = HomeFragment()
+                   val frag = HomeFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, frag)
                 }
 
                 R.id.favoritos -> {
-                    frag = FavoritosFragment()
+                   val frag = FavoritosFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, frag)
                 }
 
                 R.id.minhas_compras -> {
-                    frag = MinhasComprasFragment()
+                    val frag = MinhasComprasFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, frag)
                 }
 
                 R.id.mais -> {
-                    frag = MaisFragment()
+                    val frag = MaisFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.container, frag)
                 }
             }

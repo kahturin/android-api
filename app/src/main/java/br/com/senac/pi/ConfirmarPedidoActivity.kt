@@ -13,6 +13,6 @@ class ConfirmarPedidoActivity : AppCompatActivity() {
         binding = ActivityConfirmarPedidoBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_confirmar_pedido)
 
-        a
+
     }
 }

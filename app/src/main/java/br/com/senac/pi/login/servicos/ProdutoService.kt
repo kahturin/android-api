@@ -1,10 +1,8 @@
 package br.com.senac.pi.login.servicos
 
-import br.com.senac.pi.login.model.Pedido
 import br.com.senac.pi.login.model.Produto
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Path
 

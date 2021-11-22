@@ -6,7 +6,7 @@ import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityListaProdutosBinding
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import br.com.senac.pi.services.ProdutoService
+import br.com.senac.pi.login.servicos.ProdutoService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +14,9 @@ import br.com.senac.pi.login.model.Produto
 import com.google.android.material.snackbar.Snackbar
 import android.util.Log
 import br.com.senac.pi.databinding.CardItemCarrinhoBinding
+import br.com.senac.pi.login.servicos.url
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 
 class ListaProdutosActivity : AppCompatActivity() {
     lateinit var binding: ActivityListaProdutosBinding
@@ -29,51 +32,62 @@ class ListaProdutosActivity : AppCompatActivity() {
     }
 
     fun atualizarProdutos(){
-        val retrofit = Retrofit.Builder().baseUrl("https://oficinacordova.azurewebsites.net")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
 
-        val service = retrofit.create(ProdutoService::class.java)
+        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+        ).client(client).build()
 
-        val vall = service.listar()
+        rt?.let {
+
+            val service = rt.create(ProdutoService::class.java)
+
+            val call : Call<List<Produto>> = service.getProdutos()
 
 
-    }
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val listaProdutos = response.body()
+                        listaProdutos.let {
+                            atuaizarUI(it)
+                        }
 
-    fun atuaizarUI(lista: List<Produto>){
-        binding.container.removeAllViews()
+                    } else {
+                        //val error = response.errorBody().toString()
+                        Snackbar.make(binding.container, "Nao eh possivel atualizar os produtos", Snackbar.LENGTH_LONG).show()
 
-        lista.forEach{
-            val carBinding = CardItemCarrinhoBinding.inflate(layoutInflater)
+                        Log.e("error", response.errorBody().toString())
+                    }
+                }
 
-            carBinding.textTipo.text = it.nome
-            carBinding.textDesc.text = it.preco
+                override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
+                    Snackbar.make(binding.container, "Nao eh possivel conctarse ao servidor", Snackbar.LENGTH_LONG).show()
 
-            binding.container.addView(carBinding.root)
+                    Log.e("ListProductActivity", "Falha ao obter produtos", t)
+                }
+            }
+
+            call.enqueue(callback)
         }
+
     }
 
-    val callback = object : Callback<List<Produto>> {
-        override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
-            if(response.isSuccessful){
-                val listaProdutos = response.body()
-                atuaizarUI(listaProdutos)
+    fun atuaizarUI(lista: List<Produto>?){
+        binding.container.removeAllViews()
+        lista?.let {
+            lista.forEach{
+                val carBinding = CardItemCarrinhoBinding.inflate(layoutInflater)
 
-            }else {
-                //val error = response.errorBody().toString()
-                Snackbar.make(binding.container, "Nao eh possivel atualizar os produtos", snackbar.LENGTH_LONG.SHOW())
+                carBinding.textTipo.text = it.nm_produto
+                carBinding.textDesc.text = it.vl_produto.toString()
 
-                Log.e("error", response.errorBody().toString())
+                binding.container.addView(carBinding.root)
             }
         }
-
-        override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
-            Snackbar.make(binding.container, "Nao eh possivel conctarse ao servidor", snackbar.LENGTH_LONG.SHOW())
-
-            Log.e("error", response.errorBody().toString())
-        }
     }
-
-    call.enqueue(callback)
 
 }
