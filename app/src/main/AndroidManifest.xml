@@ -18,6 +18,13 @@
             android:exported="false" />
         <activity
             android:name=".login.InfoUserActivity"
+            android:name=".bottomnav.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".carrinho.ListaProdutosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".login.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
