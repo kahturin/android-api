@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/categoriaProd"
-        android:layout_width="53dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
@@ -52,6 +52,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imgProduto" />
 
     <TextView
+        android:id="@+id/nomeProduto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="111dp"
+        android:text="Apple/Android"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nomeProduto"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
         android:id="@+id/precoProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,6 +80,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomeProduto" />
+
+    <TextView
+        android:id="@+id/precoProduto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="141dp"
+        android:text="40R$"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/precoProduto"
+        app:layout_constraintTop_toBottomOf="@+id/nomeProduto2" />
 
     <ImageView
         android:id="@+id/imageView3"
