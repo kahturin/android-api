@@ -27,17 +27,22 @@ class TelaCadastroActivity : AppCompatActivity() {
         binding.cadastrese.setPaintFlags(binding.entrarCadastro.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
 
         binding.buttomCadastrar.setOnClickListener {
-            preencherCampo(binding.editNome)
-            preencherCampo(binding.editEmail)
-            preencherCampo(binding.editSenha)
-            preencherCampo(binding.editConfirmSenha)
+            if (binding.editNome.text.isNullOrEmpty() || binding.editEmail.text.isNullOrEmpty() || binding.editSenha.text.isNullOrEmpty() || binding.editConfirmSenha.text.isNullOrEmpty()){
+                preencherCampo(binding.editNome)
+                preencherCampo(binding.editEmail)
+                preencherCampo(binding.editSenha)
+                preencherCampo(binding.editConfirmSenha)
+            } else {
+                val intent = Intent(applicationContext, HomeActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
     fun preencherCampo(text: EditText){
         if (text.text.isNullOrEmpty()){
             text.error = "preencha este campo"
-            binding.editNome.requestFocus()
+            text.requestFocus()
         }
     }
 }

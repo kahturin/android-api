@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         val adapterProduto = adapterProduto(this,listaProdutos)
         binding.recycleView.adapter = adapterProduto
 
+
         val produto1 = Produto(
             "Quadros",
             R.drawable.hp,
@@ -40,7 +41,6 @@ class HomeActivity : AppCompatActivity() {
             "Apple/Android",
             "40R$"
         )
-
         listaProdutos.add(produto2)
     }
 }

@@ -1,13 +1,18 @@
 package br.com.senac.pi.login.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.senac.pi.R
+import br.com.senac.pi.login.HomeActivity
+import br.com.senac.pi.login.TelaProdutoActivity
 import br.com.senac.pi.login.model.Produto
 
 class adapterProduto(private val context: Context, private val produtos: MutableList<Produto>): RecyclerView.Adapter<adapterProduto.ProdutoViewHolder>() {
@@ -30,6 +35,11 @@ class adapterProduto(private val context: Context, private val produtos: Mutable
         holder.imagem.setImageResource(produtos[position].imagem)
         holder.nome.text = produtos[position].nome
         holder.preco.text = produtos[position].preco
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, TelaProdutoActivity::class.java)
+            intent.putExtra("id", position)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = produtos.size

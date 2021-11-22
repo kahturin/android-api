@@ -26,8 +26,13 @@ class LoginActivity : AppCompatActivity() {
         binding.entrarLogin.setPaintFlags(binding.entrarLogin.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
 
         binding.buttonEntrar.setOnClickListener {
-            preencherCampo(binding.edittEmailAddress)
-            preencherCampo(binding.editPassword)
+            if (binding.edittEmailAddress.text.isNullOrEmpty() || binding.editPassword.text.isNullOrEmpty()) {
+                preencherCampo(binding.edittEmailAddress)
+                preencherCampo(binding.editPassword)
+            } else {
+                val intent = Intent(applicationContext, HomeActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
