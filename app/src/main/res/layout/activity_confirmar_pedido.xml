@@ -20,7 +20,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="31dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="270dp"
                 android:text="Fulano de Souza"
