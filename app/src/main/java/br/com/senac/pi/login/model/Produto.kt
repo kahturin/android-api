@@ -1,5 +1,7 @@
 package br.com.senac.pi.login.model
 
+import android.widget.ImageView
+
 data class Produto(
     var id: Int = 0,
     var nm_produto: String  = "",

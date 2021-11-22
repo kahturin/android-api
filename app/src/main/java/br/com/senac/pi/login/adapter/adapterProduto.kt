@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.senac.pi.R
 import br.com.senac.pi.login.model.Produto
+import com.squareup.picasso.Picasso
 
 class adapterProduto(private val context: Context, private val produtos: MutableList<Produto>): RecyclerView.Adapter<adapterProduto.ProdutoViewHolder>() {
 

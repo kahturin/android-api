@@ -11,7 +11,7 @@ import retrofit2.http.Path
 interface ProdutoService {
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
     @GET("/api/produtos")
-    fun getProdutos(): Call<List<Produto>?>
+    fun getProdutos(): Call<List<Produto>>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
     @GET("/api/produto/:id")
