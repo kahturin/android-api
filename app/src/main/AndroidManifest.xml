@@ -21,6 +21,9 @@
             android:name=".bottomnav.MainActivity"
             android:exported="true" />
         <activity
+            android:name=".carrinho.ListaProdutosActivity"
+            android:exported="true" />
+        <activity
             android:name=".login.HomeActivity"
             android:exported="true">
             <intent-filter>
