@@ -27,7 +27,7 @@ class adapterProduto(private val context: Context, private val produtos: Mutable
     }
 
     override fun onBindViewHolder(holder: ProdutoViewHolder, position: Int) {
-        holder.id_categoria.text = produtos[position].id_categoria.toString()
+        holder.id_categoria.text = produtos[position].nm_categoria
         //holder.img_produto.setImageResource(produtos[position].img_produto)
         holder.nm_produto.text = produtos[position].nm_produto
         holder.vl_produto.text = produtos[position].vl_produto.toString()
