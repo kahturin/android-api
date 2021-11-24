@@ -1,7 +1,8 @@
 package br.com.senac.pi.login.model
 
 data class Pedidos(
-    val status: String,
-    val numero: String,
-    val foto: Int
+    var status: String = "",
+    var numero: String = "",
+    var foto: String = "",
+    var vl_total: Float = 0f,
 )
