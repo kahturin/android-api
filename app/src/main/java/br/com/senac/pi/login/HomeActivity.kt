@@ -97,4 +97,73 @@ class HomeActivity : AppCompatActivity() {
                 cont ++
             }
         }
+
+    fun pesquisarProdutos(nome: String) {
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+        ).client(client).build()
+
+        rt?.let {
+            val servico = rt.create(ProdutoService::class.java)
+            val call : Call<List<Produto>> = servico.produrarProduto(nome)
+
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val produtos = response.body()
+                        produtos?.let {
+                            reloadListProd(produtos)
+                        }
+                    } else {
+                        Toast.makeText(this@HomeActivity, "Falha ao buscar produtos com $nome", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
+                    Log.e("InfoUserActivity", "Perfil", t)
+                }
+            }
+            call.enqueue(callback)
+        }
+    }
+
+    fun pesquisarPorCategoria(idCategoria: Int) {
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+        ).client(client).build()
+
+        rt?.let {
+            val servico = rt.create(ProdutoService::class.java)
+            val call : Call<List<Produto>> = servico.produtosCategoria(idCategoria)
+
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val produtos = response.body()
+                        produtos?.let {
+                            reloadListProd(produtos)
+                        }
+                    } else {
+                        Toast.makeText(this@HomeActivity, "Falha ao buscar produtos da categoria $idCategoria", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
+                    Log.e("InfoUserActivity", "Perfil", t)
+                }
+            }
+            call.enqueue(callback)
+        }
+    }
+
 }
