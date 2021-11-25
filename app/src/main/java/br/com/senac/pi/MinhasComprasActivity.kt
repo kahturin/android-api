@@ -9,9 +9,7 @@ import br.com.senac.pi.databinding.ActivityMinhasComprasBinding
 import br.com.senac.pi.login.adapter.adapaterPedidos
 import br.com.senac.pi.login.model.Pedido
 import br.com.senac.pi.login.model.Pedidos
-import br.com.senac.pi.login.model.Produto
 import br.com.senac.pi.login.servicos.PedidosService
-import br.com.senac.pi.login.servicos.ProdutoService
 import br.com.senac.pi.login.servicos.token
 import br.com.senac.pi.login.servicos.url
 import okhttp3.OkHttpClient
@@ -22,7 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class MinhasCompras : AppCompatActivity() {
+class MinhasComprasActivity : AppCompatActivity() {
     lateinit var binding: ActivityMinhasComprasBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +35,7 @@ class MinhasCompras : AppCompatActivity() {
     }
 
     fun getPedidos(){
+        val t = "Bearer 61|ISqkJIuF8Dqj0ukuvBPr3V9Tx91i6YXBER2wxixD"
         val client: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
@@ -48,7 +47,7 @@ class MinhasCompras : AppCompatActivity() {
 
         rt?.let {
             val servico = rt.create(PedidosService::class.java)
-            val call : Call<List<Pedido>> = servico.getPedidos("Bearer $token")
+            val call : Call<List<Pedido>> = servico.getPedidos(t)
 
             val callback = object : Callback<List<Pedido>> {
                 override fun onResponse(call: Call<List<Pedido>>, response: Response<List<Pedido>>) {
@@ -58,7 +57,7 @@ class MinhasCompras : AppCompatActivity() {
                             listarPedidos(pedidos)
                         }
                     } else {
-                        Toast.makeText(this@MinhasCompras, "Falha ao buscar produtos", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MinhasComprasActivity, "Falha ao buscar produtos", Toast.LENGTH_LONG).show()
                     }
                 }
 

@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.senac.pi.R
 import br.com.senac.pi.login.model.Produto
+import br.com.senac.pi.login.servicos.urlImage
 import com.squareup.picasso.Picasso
 
-class adapterProduto(private val context: Context, private val produtos: MutableList<Produto>): RecyclerView.Adapter<adapterProduto.ProdutoViewHolder>() {
+class adapterProduto(private val context: Context, private val produtos: List<Produto>): RecyclerView.Adapter<adapterProduto.ProdutoViewHolder>() {
 
     inner class ProdutoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val id_categoria = itemView.findViewById<TextView>(R.id.categoriaProd)
@@ -31,6 +32,10 @@ class adapterProduto(private val context: Context, private val produtos: Mutable
         //holder.img_produto.setImageResource(produtos[position].img_produto)
         holder.nm_produto.text = produtos[position].nm_produto
         holder.vl_produto.text = produtos[position].vl_produto.toString()
+
+        Picasso.get().load(urlImage+produtos[position].img_produto)
+                .error(R.drawable.ic_launcher_background)
+                .into(holder.img_produto)
     }
 
     override fun getItemCount(): Int = produtos.size
