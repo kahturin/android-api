@@ -80,22 +80,12 @@ class HomeActivity : AppCompatActivity() {
 
             //Configurando o Adapter
             val listaProdutos: MutableList<Produto> = mutableListOf()
-            val adapterProduto = adapterProduto(this, listaProdutos)
+            val adapterProduto = adapterProduto(this, produtos)
             binding.recycleView.adapter = adapterProduto
 
-            var cont = 0
-            produtos.forEach { p ->
 
-                val produto = Produto()
 
-                produto.id = p.id
-                produto.nm_produto = p.nm_produto
-                produto.vl_produto = p.vl_produto
-                produto.nm_categoria = p.nm_categoria
 
-                listaProdutos.add(cont, produto)
-                cont ++
-            }
         }
 
     fun pesquisarProdutos(nome: String) {
