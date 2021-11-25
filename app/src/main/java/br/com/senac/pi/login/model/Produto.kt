@@ -10,4 +10,5 @@ data class Produto(
     var qtd_produto: Int = 0,
     var id_categoria: Int = 0,
     var img_produto: String? = "",
+    var nm_categoria: String? = "",
 )
