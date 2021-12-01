@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -26,9 +27,14 @@ class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onResume() {
@@ -36,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
         getProdutos()
     }
+
+
 
     fun getProdutos() {
         val client: OkHttpClient = OkHttpClient.Builder()
@@ -79,14 +87,11 @@ class HomeActivity : AppCompatActivity() {
             binding.recycleView.setHasFixedSize(true)
 
             //Configurando o Adapter
-            val listaProdutos: MutableList<Produto> = mutableListOf()
             val adapterProduto = adapterProduto(this, produtos)
             binding.recycleView.adapter = adapterProduto
-
-
-
-
         }
+
+
 
     fun pesquisarProdutos(nome: String) {
         val client: OkHttpClient = OkHttpClient.Builder()
@@ -147,7 +152,6 @@ class HomeActivity : AppCompatActivity() {
                         Toast.makeText(this@HomeActivity, "Falha ao buscar produtos da categoria $idCategoria", Toast.LENGTH_LONG).show()
                     }
                 }
-
                 override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
                     Log.e("InfoUserActivity", "Perfil", t)
                 }
@@ -155,5 +159,4 @@ class HomeActivity : AppCompatActivity() {
             call.enqueue(callback)
         }
     }
-
 }
