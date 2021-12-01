@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -26,9 +27,14 @@ class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onResume() {
@@ -36,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
         getProdutos()
     }
+
+
 
     fun getProdutos() {
         val client: OkHttpClient = OkHttpClient.Builder()
@@ -79,22 +87,76 @@ class HomeActivity : AppCompatActivity() {
             binding.recycleView.setHasFixedSize(true)
 
             //Configurando o Adapter
-            val listaProdutos: MutableList<Produto> = mutableListOf()
-            val adapterProduto = adapterProduto(this, listaProdutos)
+            val adapterProduto = adapterProduto(this, produtos)
             binding.recycleView.adapter = adapterProduto
-
-            var cont = 0
-            produtos.forEach { p ->
-
-                val produto = Produto()
-
-                produto.id = p.id
-                produto.nm_produto = p.nm_produto
-                produto.vl_produto = p.vl_produto
-                produto.nm_categoria = p.nm_categoria
-
-                listaProdutos.add(cont, produto)
-                cont ++
-            }
         }
+
+
+
+    fun pesquisarProdutos(nome: String) {
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+        ).client(client).build()
+
+        rt?.let {
+            val servico = rt.create(ProdutoService::class.java)
+            val call : Call<List<Produto>> = servico.produrarProduto(nome)
+
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val produtos = response.body()
+                        produtos?.let {
+                            reloadListProd(produtos)
+                        }
+                    } else {
+                        Toast.makeText(this@HomeActivity, "Falha ao buscar produtos com $nome", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
+                    Log.e("InfoUserActivity", "Perfil", t)
+                }
+            }
+            call.enqueue(callback)
+        }
+    }
+
+    fun pesquisarPorCategoria(idCategoria: Int) {
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+                GsonConverterFactory.create()
+        ).client(client).build()
+
+        rt?.let {
+            val servico = rt.create(ProdutoService::class.java)
+            val call : Call<List<Produto>> = servico.produtosCategoria(idCategoria)
+
+            val callback = object : Callback<List<Produto>> {
+                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                    if (response.isSuccessful) {
+                        val produtos = response.body()
+                        produtos?.let {
+                            reloadListProd(produtos)
+                        }
+                    } else {
+                        Toast.makeText(this@HomeActivity, "Falha ao buscar produtos da categoria $idCategoria", Toast.LENGTH_LONG).show()
+                    }
+                }
+                override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
+                    Log.e("InfoUserActivity", "Perfil", t)
+                }
+            }
+            call.enqueue(callback)
+        }
+    }
 }

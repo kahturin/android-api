@@ -27,7 +27,7 @@ class adapaterPedidos(private val context: Context, private val pedidos: Mutable
     override fun onBindViewHolder(holder: adapaterPedidos.PedidosViewHolder, position: Int) {
         holder.status.text = pedidos[position].status
         holder.numero.text = pedidos[position].numero
-        holder.foto.setImageResource(pedidos[position].foto)
+        //holder.foto.setImageResource(pedidos[position].foto)
 //        holder.foto.setOnClickListener {
 //            val intent = Intent(applicationContext, TelaProdutoActivity::class.java)
 //            startActivity(intent)
@@ -40,6 +40,6 @@ class adapaterPedidos(private val context: Context, private val pedidos: Mutable
     inner class PedidosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val status = itemView.findViewById<TextView>(R.id.statusPedido)
         val numero = itemView.findViewById<TextView>(R.id.numeroPedido)
-        val foto = itemView.findViewById<ImageView>(R.id.imageView4)
+        //val foto = itemView.findViewById<ImageView>(R.id.imageView4)
     }
 }
