@@ -1,21 +1,13 @@
 package br.com.senac.pi.login.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.senac.pi.R
-import br.com.senac.pi.databinding.ActivityHomeBinding
-import br.com.senac.pi.login.LoginActivity
-import br.com.senac.pi.login.TelaProdutoActivity
 import br.com.senac.pi.login.model.Pedidos
-import java.text.NumberFormat
 
 
 class adapaterPedidos(private val context: Context, private val pedidos: MutableList<Pedidos>): RecyclerView.Adapter<adapaterPedidos.PedidosViewHolder>(){

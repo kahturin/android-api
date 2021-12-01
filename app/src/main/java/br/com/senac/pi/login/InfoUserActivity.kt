@@ -43,10 +43,6 @@ class InfoUserActivity : AppCompatActivity() {
     }
 
     fun getPerfil() {
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            usuario = bundle.getString("usuario").toString()
-            token = bundle.getString("token").toString()
 
             val client: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
@@ -100,12 +96,10 @@ class InfoUserActivity : AppCompatActivity() {
                 call.enqueue(callback)
 
             }
-        }
+
     }
     fun redirectEditUser() {
         val i: Intent = Intent(this, EditInfoUserActivity::class.java)
-        i.putExtra("usuario", usuario)
-        i.putExtra("token", token)
         startActivity(i)
     }
 

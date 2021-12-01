@@ -35,7 +35,7 @@ class EditInfoUserActivity : AppCompatActivity() {
         }
 
         btnCancelar.setOnClickListener {
-            cancelEdit(usuario, token)
+            cancelEdit()
         }
     }
     override fun onResume() {
@@ -92,7 +92,7 @@ class EditInfoUserActivity : AppCompatActivity() {
         }
     }
 
-    fun cancelEdit(usuario: String, token: String){
+    fun cancelEdit(){
         Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
         redirectInfoUserActivity()
     }
