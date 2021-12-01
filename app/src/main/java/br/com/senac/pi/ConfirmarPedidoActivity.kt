@@ -1,5 +1,6 @@
 package br.com.senac.pi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.senac.pi.databinding.ActivityConfirmarPedidoBinding
@@ -73,6 +74,9 @@ class ConfirmarPedidoActivity : AppCompatActivity() {
 
             if(binding.TxtCep.text != null && binding.TxtNumero.text != null && binding.TxtComplemento.text != null
                 && binding.TxtBairro.text != null && binding.TxtEndereco.text != null && binding.TxtCidade.text != null && binding.TxtEstado.text != null){
+
+                val i = Intent(this@ConfirmarPedidoActivity, PedidoProcessadoActivity::class.java)
+                startActivity(i)
 
             }
 

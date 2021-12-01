@@ -14,10 +14,22 @@
         <entry key="..\:/Users/Karina/AndroidStudioProjects/android-pi/app/src/main/res/layout/activity_tela_produto.xml" value="0.3632246376811594" />
         <entry key="..\:/Users/Karina/AndroidStudioProjects/android-pi/app/src/main/res/layout/quadros_item.xml" value="0.33" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_confirmar_pedido.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_edit_info_user.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_home.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_info_user.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_lista_produtos.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_login.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_minhas_compras.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_pedido_processado.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_tela_cadastro.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/activity_tela_produto.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/card_item_carrinho.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/fragment_favoritos.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/fragment_home.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/fragment_mais.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/fragment_minhas_compras.xml" value="0.3182291666666667" />
+        <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/pedidos_item.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/phmar/Documents/GitHub/android-pi/app/src/main/res/layout/quadros_item.xml" value="0.3182291666666667" />
       </map>
     </option>
