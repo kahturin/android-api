@@ -9,4 +9,6 @@ interface RegisterService {
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
     @POST("/api/register")
     fun registrar(@Body registro: Register, @Header("Authorization") authorization: String):Call<Login>
+
+
 }

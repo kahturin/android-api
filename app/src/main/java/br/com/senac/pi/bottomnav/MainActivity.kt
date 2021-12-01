@@ -5,7 +5,7 @@ import android.os.Bundle
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class  MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
