@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import br.com.senac.pi.MinhasComprasActivity
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
@@ -108,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
         //i.putExtra("token", token)
         //startActivity(i)
 
-        val i = Intent(this@LoginActivity, InfoUserActivity::class.java)
+        val i = Intent(this@LoginActivity, MinhasComprasActivity::class.java)
         i.putExtra("usuario", usuario)
         i.putExtra("token", token)
         startActivity(i)

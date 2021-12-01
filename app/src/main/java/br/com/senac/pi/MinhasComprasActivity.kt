@@ -18,6 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.NumberFormat
+import java.text.NumberFormat.*
 import java.util.concurrent.TimeUnit
 
 class MinhasComprasActivity : AppCompatActivity() {
@@ -70,6 +72,8 @@ class MinhasComprasActivity : AppCompatActivity() {
     }
 
     fun listarPedidos(pedidos: List<Pedido>){
+        val numberFormat = NumberFormat.getCurrencyInstance()
+
         binding = ActivityMinhasComprasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -87,7 +91,7 @@ class MinhasComprasActivity : AppCompatActivity() {
 
             pedido.numero = p.id_pedido.toString()
             pedido.status = p.status
-            pedido.vl_total = p.vl_total
+            pedido.vl_total = numberFormat.format(p.vl_total)
 
 
             listaPedidos.add(cont, pedido)

@@ -15,6 +15,8 @@ import br.com.senac.pi.databinding.ActivityHomeBinding
 import br.com.senac.pi.login.LoginActivity
 import br.com.senac.pi.login.TelaProdutoActivity
 import br.com.senac.pi.login.model.Pedidos
+import java.text.NumberFormat
+
 
 class adapaterPedidos(private val context: Context, private val pedidos: MutableList<Pedidos>): RecyclerView.Adapter<adapaterPedidos.PedidosViewHolder>(){
 
@@ -27,6 +29,7 @@ class adapaterPedidos(private val context: Context, private val pedidos: Mutable
     override fun onBindViewHolder(holder: adapaterPedidos.PedidosViewHolder, position: Int) {
         holder.status.text = pedidos[position].status
         holder.numero.text = pedidos[position].numero
+        holder.vlTotal.text = "Total Pedido: "+pedidos[position].vl_total
         //holder.foto.setImageResource(pedidos[position].foto)
 //        holder.foto.setOnClickListener {
 //            val intent = Intent(applicationContext, TelaProdutoActivity::class.java)
@@ -40,6 +43,7 @@ class adapaterPedidos(private val context: Context, private val pedidos: Mutable
     inner class PedidosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val status = itemView.findViewById<TextView>(R.id.statusPedido)
         val numero = itemView.findViewById<TextView>(R.id.numeroPedido)
+        val vlTotal = itemView.findViewById<TextView>(R.id.vlTotal)
         //val foto = itemView.findViewById<ImageView>(R.id.imageView4)
     }
 }
