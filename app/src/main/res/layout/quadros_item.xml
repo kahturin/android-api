@@ -7,11 +7,11 @@
 
     <TextView
         android:id="@+id/categoriaProd"
-        android:layout_width="53dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="358dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:text="Quadros"
         app:layout_constraintBottom_toTopOf="@+id/imgProduto"
@@ -23,14 +23,14 @@
 
     <ImageView
         android:id="@+id/imgProduto"
-        android:layout_width="0dp"
-        android:layout_height="178dp"
+        android:layout_width="135dp"
+        android:layout_height="180dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
-        android:layout_marginEnd="200dp"
+        android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/apple" />
@@ -52,6 +52,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imgProduto" />
 
     <TextView
+        android:id="@+id/nomeProduto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="111dp"
+        android:text="Apple/Android"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nomeProduto"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
         android:id="@+id/precoProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,4 +80,33 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomeProduto" />
+
+    <TextView
+        android:id="@+id/precoProduto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="141dp"
+        android:text="40R$"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/precoProduto"
+        app:layout_constraintTop_toBottomOf="@+id/nomeProduto2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="135dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toEndOf="@id/imgProduto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gamer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

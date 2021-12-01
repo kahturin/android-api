@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="411dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pedid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Pedido"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/numeroPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Nº Pedido"
+                android:paddingLeft="4dp"
+                android:paddingTop="8dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/statusPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Status Pedido"
+                android:paddingLeft="4dp"
+                android:paddingTop="8dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:text="Enviado"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/vlTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Vl Total Pedido"
+                android:paddingLeft="4dp"
+                android:paddingTop="8dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listaProdPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"></LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

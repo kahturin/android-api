@@ -6,6 +6,7 @@ import android.os.Bundle
 import br.com.senac.pi.ConfirmarPedidoActivity
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityConfirmarPedidoBinding
+import br.com.senac.pi.databinding.ActivityHomeBinding
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.databinding.ActivityTelaCadastroBinding
 import br.com.senac.pi.databinding.ActivityTelaProdutoBinding
@@ -16,6 +17,7 @@ class TelaProdutoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityTelaProdutoBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_tela_produto)
 
         binding = ActivityTelaProdutoBinding.inflate(layoutInflater)
