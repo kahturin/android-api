@@ -1,4 +1,4 @@
-package br.com.senac.pi.bottomnav
+package br.com.senac.pi.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,12 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.senac.pi.R
-import br.com.senac.pi.databinding.ActivityConfirmarPedidoBinding.inflate
-import br.com.senac.pi.databinding.ActivityHomeBinding
-import br.com.senac.pi.login.adapter.adapterProduto
 import br.com.senac.pi.login.model.Produto
 import br.com.senac.pi.login.servicos.ProdutoService
 import br.com.senac.pi.login.servicos.url
