@@ -9,24 +9,23 @@ import br.com.senac.pi.fragments.CarrinhoFragment
 import br.com.senac.pi.fragments.HomeFragment
 import br.com.senac.pi.fragments.PedidosFragment
 import br.com.senac.pi.fragments.PerfilFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class  MainActivity : AppCompatActivity() {
     val home = HomeFragment()
     val pedidos = PedidosFragment()
     val carrinho = CarrinhoFragment()
     val perfil = PerfilFragment()
-    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-
+        val bt = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
         redirectFragment(home)
 
-        binding.bottomNavigation.setOnItemSelectedListener{
+        bt.setOnItemSelectedListener{
 
             when(it.itemId){
                 R.id.ic_home -> redirectFragment(home)
