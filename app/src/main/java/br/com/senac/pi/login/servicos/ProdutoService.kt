@@ -12,14 +12,14 @@ interface ProdutoService {
     fun getProdutos(): Call<List<Produto>>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
-    @GET("/api/produto/:id")
+    @GET("/api/produto/{id}")
     fun showProduto(@Path("id") idProduto: Int): Call<Produto>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
-    @GET("/api/produto/:s")
-    fun produrarProduto(@Path("s") trecho: String): Call<List<Produto>>
+    @GET("/api/produtos/procurar/{s}")
+    fun procurarProduto(@Path("s") trecho: String): Call<List<Produto>>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
-    @GET("api/produtos/categoria/:id")
+    @GET("api/produtos/categoria/{id}")
     fun produtosCategoria(@Path("id") idCategoria: Int): Call<List<Produto>>
 }

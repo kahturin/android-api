@@ -12,6 +12,6 @@ interface CategoriaService {
     fun getCategorias():Call<List<Categoria>>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
-    @GET("/api/categoria/:id")
+    @GET("/api/categoria/{id}")
     fun getCategoria(@Path("id") id: Int): Call<Categoria>
 }

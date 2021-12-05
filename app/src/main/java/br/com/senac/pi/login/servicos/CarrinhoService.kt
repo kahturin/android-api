@@ -11,7 +11,7 @@ interface CarrinhoService {
     fun getCarrinho(@Header("Autorization") authorization: String): Call<List<ProdutoCarrinho>?>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
-    @DELETE("/api/produto/carrinho/:id")
+    @DELETE("/api/produto/carrinho/{id}")
     fun removerProdutoCarrinho(@Path("id") idProduto: Int, @Header("Autorization") authorization: String): Call<MsgRetorno>
 
     @Headers("Content-Type: application/json;charset=UTF-8", "Accept: application/json")
