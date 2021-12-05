@@ -5,4 +5,10 @@
     <string name="no_permission">Não tem permissão para ler arquivos.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imagem_produto_content_description">Imagem Produto</string>
+    <string name="apple_android">Apple/Android</string>
+    <string name="r_40">R$ 40</string>
+    <string name="title">Title</string>
+    <string name="quadros">Quadros</string>
+    <string name="preco">R$ %1$s</string>
 </resources>

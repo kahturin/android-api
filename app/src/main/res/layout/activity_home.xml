@@ -16,10 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/banner"
-        tools:srcCompat="@drawable/banner" />
+        tools:srcCompat="@drawable/banner"
+        android:contentDescription="@string/title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleViewCategoria"
         android:layout_width="409dp"
         android:layout_height="381dp"
         android:layout_marginStart="1dp"
