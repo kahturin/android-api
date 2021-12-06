@@ -1,11 +1,10 @@
-package br.com.senac.pi.bottomnav
+package br.com.senac.pi.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import br.com.senac.pi.R
 import br.com.senac.pi.login.model.Produto
 import br.com.senac.pi.login.servicos.ProdutoService

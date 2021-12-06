@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import br.com.senac.pi.MinhasComprasActivity
 import br.com.senac.pi.R
+import br.com.senac.pi.bottomnav.MainActivity
 import br.com.senac.pi.databinding.ActivityLoginBinding
 import br.com.senac.pi.login.model.Login
 import br.com.senac.pi.login.servicos.LoginService
@@ -99,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun redirectHome(){
-        val i = Intent(this@LoginActivity, HomeActivity::class.java)
+        val i = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(i)
     }
 }

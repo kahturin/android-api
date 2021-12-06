@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
 import br.com.senac.pi.R
+import br.com.senac.pi.bottomnav.MainActivity
 import br.com.senac.pi.login.model.Info
 import br.com.senac.pi.login.model.InfoUser
 import br.com.senac.pi.login.model.MsgRetorno
@@ -83,7 +84,7 @@ class EditInfoUserActivity : AppCompatActivity() {
                         val retorno = response.body()
                         retorno?.let {
                             Toast.makeText(this@EditInfoUserActivity, it.msg.toString(), Toast.LENGTH_LONG)
-                            redirectInfoUserActivity()
+                            irParaHome()
                         }
                     }
                 }
@@ -94,7 +95,7 @@ class EditInfoUserActivity : AppCompatActivity() {
 
     fun cancelEdit(){
         Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
-        redirectInfoUserActivity()
+        irParaHome()
     }
 
     fun redirectLogin(){
@@ -102,10 +103,8 @@ class EditInfoUserActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-    fun redirectInfoUserActivity(){
-        val i = Intent(this, InfoUserActivity::class.java)
-        i.putExtra("usuario", usuario)
-        i.putExtra("token", token)
+    fun irParaHome(){
+        val i = Intent(this, MainActivity::class.java)
         startActivity(i)
     }
 

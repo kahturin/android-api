@@ -3,23 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
-        android:icon="@android:drawable/stat_notify_error"
+        android:id="@+id/ic_home"
+        android:icon="@drawable/home_24"
         android:title="Home"
-        app:showAsAction="never" />
+        />
     <item
-        android:id="@+id/favoritos"
-        android:icon="@android:drawable/stat_notify_sync_noanim"
-        android:title="Favoritos"
-        app:showAsAction="never" />
+        android:id="@+id/ic_pedidos"
+        android:icon="@drawable/bag_24"
+        android:title="Pedidos"
+        />
     <item
-        android:id="@+id/minhas_compras"
-        android:icon="@android:drawable/sym_action_chat"
-        android:title="Minhas Compras"
-        app:showAsAction="never" />
+        android:id="@+id/ic_carrinho"
+        android:icon="@drawable/cart_24"
+        android:title="Carrinho"
+        />
     <item
-        android:id="@+id/mais"
-        android:icon="@android:drawable/stat_sys_data_bluetooth"
-        android:title="Mais"
-        app:showAsAction="never" />
+        android:id="@+id/ic_perfil"
+        android:icon="@drawable/person_24"
+        android:title="Perfil"
+        />
 </menu>
