@@ -1,10 +1,13 @@
 package br.com.senac.pi.login
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.senac.pi.R
 import br.com.senac.pi.databinding.ActivityHomeBinding
@@ -24,6 +27,16 @@ import java.util.concurrent.TimeUnit
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
     var categoriasResponse: List<Categoria> = listOf<Categoria>()
+    val listProdutosCategoria = arrayListOf<ProdutosCategoria>()
+    val client: OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .build()
+
+    val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
+        GsonConverterFactory.create()
+    ).client(client).build()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,26 +46,37 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.pesquisa)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("",false)
+                searchItem.collapseActionView()
+
+//                Toast.makeText(this@HomeActivity, "Looking for $query", Toast.LENGTH_LONG).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { pesquisarProdutos(it) }
+//                Toast.makeText(this@HomeActivity, "Looking for $newText", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        })
+
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onResume() {
         super.onResume()
-
         getCategorias()
     }
 
-
     fun getCategorias() {
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
-
-        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
-            GsonConverterFactory.create()
-        ).client(client).build()
-
         rt?.let {
             val servicoCategorias = rt.create(CategoriaService::class.java)
             val callCategorias: Call<List<Categoria>> = servicoCategorias.getCategorias()
@@ -68,7 +92,7 @@ class HomeActivity : AppCompatActivity() {
                         categorias?.let {
                             fillCategoriasResponse(it)
                             Log.i("Categorias", "Categorias: $categoriasResponse")
-                            getProdutos(rt)
+                            getProdutos()
                         }
                     } else {
                         Toast.makeText(
@@ -87,9 +111,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun getProdutos(rt: Retrofit) {
-        val servicoProdutos = rt.create(ProdutoService::class.java)
-        val callProdutos: Call<List<Produto>> = servicoProdutos.getProdutos()
+    private fun getProdutos() {
+        val servicoProdutos = rt?.create(ProdutoService::class.java)
+        val callProdutos: Call<List<Produto>>? = servicoProdutos?.getProdutos()
         val callbackProdutos = object : Callback<List<Produto>> {
             override fun onResponse(
                 call: Call<List<Produto>>,
@@ -115,7 +139,7 @@ class HomeActivity : AppCompatActivity() {
                 Log.e("InfoUserActivity", "Perfil", t)
             }
         }
-        callProdutos.enqueue(callbackProdutos)
+        callProdutos?.enqueue(callbackProdutos)
     }
 
     private fun fillCategoriasResponse(categorias: List<Categoria>) {
@@ -123,16 +147,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun reloadListProdutos(produtos: List<Produto>?) {
-        val listProducts = arrayListOf<Produto>()
-        val listProdutosCategoria = arrayListOf<ProdutosCategoria>()
+        listProdutosCategoria.clear()
 
+        val listProducts = arrayListOf<Produto>()
+        val listCategria = arrayListOf<Categoria>()
         categoriasResponse.forEach { categoria ->
             produtos?.forEach{ produto ->
                 if (produto.id_categoria == categoria.id){
                     listProducts.add(produto)
+                    listCategria.add(categoria)
                 }
             }
-            listProdutosCategoria.add(ProdutosCategoria(categoria, listProducts))
+            if(listCategria.isNotEmpty()){
+                listProdutosCategoria.add(ProdutosCategoria(categoria, listProducts))
+            }
+            listCategria.clear()
         }
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -144,62 +173,46 @@ class HomeActivity : AppCompatActivity() {
 
         //Configurando o Adapter
         val adapterCategoria = AdapterCategoria(this, listProdutosCategoria)
-        Log.i("Categorias", "Categorias: $listProducts")
+        Log.i("ProdutosCategorias", "ProdutosCategorias: $listProducts")
         binding.recycleViewCategoria.adapter = adapterCategoria
     }
 
 
-    fun pesquisarProdutos(nome: String) {
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
+    fun pesquisarProdutos(nome: String="") {
+        rt?.let {rt ->
+            nome?.let { nome->
+                val servico = rt.create(ProdutoService::class.java)
+                val call: Call<List<Produto>> = servico.procurarProduto(nome)
 
-        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
-            GsonConverterFactory.create()
-        ).client(client).build()
-
-        rt?.let {
-            val servico = rt.create(ProdutoService::class.java)
-            val call: Call<List<Produto>> = servico.produrarProduto(nome)
-
-            val callback = object : Callback<List<Produto>> {
-                override fun onResponse(
-                    call: Call<List<Produto>>,
-                    response: Response<List<Produto>>
-                ) {
-                    if (response.isSuccessful) {
-                        val produtos = response.body()
-                        produtos?.let {
-//                            reloadListCategorias(produtos)
+                val callback = object : Callback<List<Produto>> {
+                    override fun onResponse(
+                        call: Call<List<Produto>>,
+                        response: Response<List<Produto>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val produtos = response.body()
+                            produtos?.let {
+                                reloadListProdutos(produtos)
+                            }
+                        } else {
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "Falha ao buscar produtos com $nome",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-                    } else {
-                        Toast.makeText(
-                            this@HomeActivity,
-                            "Falha ao buscar produtos com $nome",
-                            Toast.LENGTH_LONG
-                        ).show()
+                    }
+
+                    override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
+                        Log.e("InfoUserActivity", "Perfil", t)
                     }
                 }
-
-                override fun onFailure(call: Call<List<Produto>?>, t: Throwable) {
-                    Log.e("InfoUserActivity", "Perfil", t)
-                }
+                call.enqueue(callback)
             }
-            call.enqueue(callback)
         }
     }
 
     fun pesquisarPorCategoria(idCategoria: Int) {
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
-
-        val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
-            GsonConverterFactory.create()
-        ).client(client).build()
-
         rt?.let {
             val servico = rt.create(ProdutoService::class.java)
             val call: Call<List<Produto>> = servico.produtosCategoria(idCategoria)
