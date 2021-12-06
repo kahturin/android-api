@@ -2,16 +2,11 @@ package br.com.senac.pi.bottomnav
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import br.com.senac.pi.R
-import br.com.senac.pi.databinding.ActivityConfirmarPedidoBinding.inflate
-import br.com.senac.pi.databinding.ActivityHomeBinding
-import br.com.senac.pi.login.adapter.adapterProduto
 import br.com.senac.pi.login.model.Produto
 import br.com.senac.pi.login.servicos.ProdutoService
 import br.com.senac.pi.login.servicos.url
@@ -41,20 +36,23 @@ class HomeFragment : Fragment() {
 
     fun getProdutos() {
         val client: OkHttpClient = OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
 
         val rt: Retrofit? = Retrofit.Builder().baseUrl(url).addConverterFactory(
-                GsonConverterFactory.create()
+            GsonConverterFactory.create()
         ).client(client).build()
 
         rt?.let {
             val servico = rt.create(ProdutoService::class.java)
-            val call : Call<List<Produto>> = servico.getProdutos()
+            val call: Call<List<Produto>> = servico.getProdutos()
 
             val callback = object : Callback<List<Produto>> {
-                override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+                override fun onResponse(
+                    call: Call<List<Produto>>,
+                    response: Response<List<Produto>>
+                ) {
                     if (response.isSuccessful) {
                         val produtos = response.body()
                         produtos?.let {
