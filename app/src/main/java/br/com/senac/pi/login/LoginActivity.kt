@@ -41,13 +41,13 @@ class LoginActivity : AppCompatActivity() {
         binding.entrarLogin.paintFlags = binding.entrarLogin.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.buttonEntrar.setOnClickListener {
-            //preencherCampo(binding.edittEmailAddress)
-            //preencherCampo(binding.editPassword)
+            preencherCampo(binding.edittEmailAddress)
+            preencherCampo(binding.editPassword)
 
-            //login.password = binding.editPassword.text.toString()
-            //login.email = binding.edittEmailAddress.text.toString()
-            login.password = "senha123321"
-            login.email = "djalma@djalma.com"
+            login.password = binding.editPassword.text.toString()
+            login.email = binding.edittEmailAddress.text.toString()
+//            login.password = "senha123321"
+//            login.email = "djalma@djalma.com"
 
 
 
@@ -108,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
         //i.putExtra("token", token)
         //startActivity(i)
 
-        val i = Intent(this@LoginActivity, InfoUserActivity::class.java)
+        val i = Intent(this@LoginActivity, TelaProdutoActivity::class.java)
         i.putExtra("usuario", usuario)
         i.putExtra("token", token)
         startActivity(i)
